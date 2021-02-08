@@ -36,9 +36,9 @@ $router->group(['prefix' => 'v1'],function () use ($router) {
 
     $router->group(['prefix' => 'book'], function () use($router) {
         $router->post('create',['uses' => 'Book\CreateController'])->middleware('jwt.auth');
-        $router->delete('delete/{id}',['uses' => 'Book\DeleteController']);
         $router->get('get/all',['uses' => 'Book\GetAllController']);
-        // $router->delete('delete/{id}',['uses' => 'BookCategory\DeleteController']);
+        $router->get('get/{id}',['uses' => 'Book\GetController']);
+        $router->delete('delete/{id}',['uses' => 'Book\DeleteController']);
     });
 
 });
