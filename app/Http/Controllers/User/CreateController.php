@@ -15,7 +15,7 @@ class CreateController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'name' => 'required',
-            'nohp' => 'required',
+            'nohp' => 'required|max:12',
             'address' => 'required',
             'email' => 'required|email',
             'password' => 'required',
@@ -33,11 +33,19 @@ class CreateController extends Controller
             'email'=>$request->input('email'),
             'password'=>Hash::make($request->input('password')),
             'role_id'=>$request->input('role_id')
-        ];
+        ];        
 
         if (!Role::find($data['role_id'])) {
             return $this->response()->failMessage(404,'role not found');
         }
+
+        if (User::where('nohp','=',$data['nohp'])->first()) {
+            return $this->response()->failMessage(442,'User with this number phone is already exist');
+        }
+
+        if (User::where('email','=',$data['email'])->first()) {
+            return $this->response()->failMessage(442,'User with this email is already exist');
+        }   
 
         $this->create($data);
 
@@ -55,5 +63,7 @@ class CreateController extends Controller
             'password'=>$data['password'],
             'role_id'=>$data['role_id']
         ]);
+
+        
     }
 }
