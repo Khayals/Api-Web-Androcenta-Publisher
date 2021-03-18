@@ -53,12 +53,12 @@ class Handler extends ExceptionHandler
 
             if ($preException instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException)
             {
-                return response()->json(['status'=>false,'message' => 'TOKEN_EXPIRED']);
+                return response()->json(['status'=>false,'message' => 'TOKEN_EXPIRED'],401);
             }
             else if ($preException instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException)
             {
 
-                return response()->json(['status'=>false,'message' => 'TOKEN_INVALID']);
+                return response()->json(['status'=>false,'message' => 'TOKEN_INVALID'],401);
             }
             else if ($preException instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException) {
 
@@ -68,7 +68,7 @@ class Handler extends ExceptionHandler
 
         if ($exception->getMessage() === 'Token not provided')
         {
-            return response()->json(['status'=>false,'message' => 'Token not provided']);
+            return response()->json(['status'=>false,'message' => 'Token not provided'],401);
         }
         
         return parent::render($request, $exception);

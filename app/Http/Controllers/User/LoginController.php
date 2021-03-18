@@ -23,7 +23,7 @@ class LoginController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!$token = auth('api')->attempt($credentials)) {            
-            return $this->response()->failMessage(442,'username or password wrong');
+            return $this->response()->failMessage(422,'username or password wrong');
         }
 
         $update=tap(User::where('email','=',$credentials['email']))->update(['token'=>$token])->first();
