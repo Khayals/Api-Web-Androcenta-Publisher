@@ -19,7 +19,8 @@ class CreateController extends Controller
             'address' => 'required',
             'email' => 'required|email',
             'password' => 'required',
-            'role_id' => 'required'
+            'role_id' => 'required',
+            'photo'=>'required'
         ]);
 
         if($validator->fails()){
@@ -32,7 +33,8 @@ class CreateController extends Controller
             'address'=>$request->input('address'),
             'email'=>$request->input('email'),
             'password'=>Hash::make($request->input('password')),
-            'role_id'=>$request->input('role_id')
+            'role_id'=>$request->input('role_id'),
+            'photo'=>$request->input('photo')
         ];        
 
         if (!Role::find($data['role_id'])) {
@@ -61,7 +63,8 @@ class CreateController extends Controller
             'address'=>$data['address'],
             'email'=>$data['email'],
             'password'=>$data['password'],
-            'role_id'=>$data['role_id']
+            'role_id'=>$data['role_id'],
+            'photo'=>$data['photo']
         ]);
 
         
