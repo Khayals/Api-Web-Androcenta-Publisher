@@ -22,6 +22,7 @@ class LoginController extends Controller
 
         $credentials = request(['email', 'password']);
 
+        //update
         if (!$token = auth('api')->attempt($credentials)) {            
             return $this->response()->failMessage(422,'username or password wrong');
         }

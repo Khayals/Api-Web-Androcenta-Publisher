@@ -24,7 +24,7 @@ $router->group(['prefix' => 'v1'],function () use ($router) {
         $router->post('create',['uses' => 'User\CreateController']);
         $router->post('login',['uses' => 'User\LoginController']);
         $router->get('get/all',['uses' => 'User\GetAllController']);
-        $router->get('get/current',['uses' => 'User\GetController'])->middleware('jwt.auth');
+        $router->get('get/current',['uses' => 'User\GetController'])->middleware('jwt.auth');//update
         $router->get('logout',['uses' => 'User\LogoutController'])->middleware('jwt.auth');
     });
 
