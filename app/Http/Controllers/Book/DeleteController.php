@@ -23,6 +23,11 @@ class DeleteController extends Controller
         $data=[
             'publicId'=>$request->input('publicId')
         ];
+        
+        $user=auth('api')->user();
+        if ($user->role_id != 1) {
+            return $this->response()->failMessage(403,'sorry only admin can create book category');
+        }
 
         if (!$book=Book::find($id)) {
             return $this->response()->failMessage(404,'book not found');

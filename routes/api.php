@@ -41,5 +41,9 @@ $router->group(['prefix' => 'v1'],function () use ($router) {
         $router->delete('delete/{id}',['uses' => 'Book\DeleteController']);
     });
 
+    $router->group(['prefix' => 'gdrive'], function () use($router) {
+        $router->post('upload',['uses' => 'GoogleDrive\UploadGoogleDriveController']);
+    });
+
 });
 
