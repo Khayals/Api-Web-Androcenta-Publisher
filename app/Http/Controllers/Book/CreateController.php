@@ -59,7 +59,8 @@ class CreateController extends Controller
         try {
             Cloudder::upload($image,null,array('folder'=>'cover_book','resource_type'=>'image'));
             $imgUrl = Cloudder::show(Cloudder::getPublicId());
-            $this->create($data,$imgUrl);
+            $replaceImg=str_replace('/c_fit,h_150,w_150','',$imgUrl);
+            $this->create($data,$replaceImg);
             return $this->response()->successMessage('create book success');
         } catch (\Throwable $th) {
             return $this->response()->failMessage(422,$th->getMessage());
