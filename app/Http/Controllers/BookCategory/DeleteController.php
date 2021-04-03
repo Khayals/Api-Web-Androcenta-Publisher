@@ -12,7 +12,7 @@ class DeleteController extends Controller
     {
         $user=auth('api')->user();
         if ($user->role_id != 1) {
-            return $this->response()->failMessage(403,'sorry only admin can create book category');
+            return $this->response()->failMessage(403,'sorry only admin can delete book category');
         }
         
         if (!$bookCategory=BookCategory::find($id)) {

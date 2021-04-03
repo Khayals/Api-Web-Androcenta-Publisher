@@ -31,14 +31,14 @@ $router->group(['prefix' => 'v1'],function () use ($router) {
     $router->group(['prefix' => 'bookcategory'], function () use($router) {
         $router->post('create',['uses' => 'BookCategory\CreateController'])->middleware('jwt.auth');
         $router->get('get/all',['uses' => 'BookCategory\GetAllController']);
-        $router->delete('delete/{id}',['uses' => 'BookCategory\DeleteController']);
+        $router->delete('delete/{id}',['uses' => 'BookCategory\DeleteController'])->middleware('jwt.auth');
     });
 
     $router->group(['prefix' => 'book'], function () use($router) {
         $router->post('create',['uses' => 'Book\CreateController'])->middleware('jwt.auth');
         $router->get('get/all',['uses' => 'Book\GetAllController']);
         $router->get('get/{id}',['uses' => 'Book\GetController']);
-        $router->delete('delete/{id}',['uses' => 'Book\DeleteController']);
+        $router->delete('delete/{id}',['uses' => 'Book\DeleteController'])->middleware('jwt.auth');
     });
 
     $router->group(['prefix' => 'gdrive'], function () use($router) {
